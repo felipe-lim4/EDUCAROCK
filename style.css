@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #06011B;
+    overflow-x: hidden;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    background-color: #06011B;
+    align-items: center;
+    color: #FFFFFF;
+    width: 100%;
+    height: 10%;
+    padding-left: 5%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: Medium;
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    height: 100px;
+}
+
+
+.navbar{
+    display: flex;
+    width: 90%;
+    height: 100%;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    background-color: 06011;
+    
+}
+
+.navbar ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.login_register{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+    width: 60%;
+}
+.login_register_buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 60%;
+    justify-content: space-between;
+    height: 100%;
+
+}
+
+.login_register_buttons button{
+    border-style: none;
+    border-radius: 8px;
+    width: 100px;
+    height: 35px;
+    color: #FFFFFF;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-style: Medium;
+}
+
+.registre-se{
+    background-color: #A90F0F;
+}
+
+.login{
+   background-color: #06011B;
+}
+
+main{
+    height: 90%;
+}
+
+section{
+    height: 100vh;
+}
+.container_home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.home_left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home_left h1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: bold;
+    font-size: 64px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+.home_left h1 span{
+    color: #A90F0F;
+}
+
+.home_left p {
+    margin-top: 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+.home_left button{
+    border-style: none;
+    border-radius: 8px;
+    width: 200px;
+    height: 60px;
+    background-color: #A90F0FFF;
+    color: #FFFFFF;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    font-style: bold;
+}
+
+.constainer_inspiracao{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    height: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.inspiracao_lipe{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inspiracao_lipe img{
+    border-radius: 15px;
+    height: 75%;
+}
+
+.inspiracao_text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 65%;
+}
+
+.inspiracao_text h1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: bold;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+
+}
+
+.inspiracao_text p{
+    margin-top: 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: bold;
+    font-size: 24px;
+    color: #FFFFFF;
+    text-align: justify;
+}
+
+.inspiracao_text p span{
+    color:#A90F0F;
+    font-family: 600;
+}
+
+
+.container_sobre_nos{
+    display: flex;
+    flex-direction: row;
+    height: 85%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+.sobre_nos_text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.sobre_nos_mobile{
+    display: flex;
+    flex-direction: row;
+}
+
+.sobre_nos_text h1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: bold;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.sobre_nos_text p{
+    margin-top: 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: bold;
+    font-size: 24px;
+    color: #FFFFFF;
+    text-align: justify;
+}
+
+.sobre_nos_text span{
+    color: #A90F0F;
+    font-weight: 600;
+}
+
+.container_lendas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-image: url("./assets/fundolenda.png");
+}
+
+.caixa_lenda{
+    width: 70%;
+    background-color: rgba(6, 1, 27, 0.8);
+    border-radius: 20px;
+    padding: 2%;
+}
+
+.caixa_lenda h1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: bold;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.caixa_lenda p{
+    margin-top: 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: bold;
+    font-size: 24px;
+    color: #FFFFFF;
+    text-align: justify;
+}
+
+.caixa_lenda span{
+    color: #A90F0F;
+}
+
+.lenda_exemplo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container_lenda_exemplo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+    height: 80%;
+}
+
+.container_lenda_exemplo h1{
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: bold;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.container_lenda_exemplo {
+    margin-top: 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: bold;
+    font-size: 24px;
+    color: #FFFFFF;
+    text-align: justify;
+}
+
+.container_lenda_exemplo div{
+    width: 25%;
+    text-align: center;
+}

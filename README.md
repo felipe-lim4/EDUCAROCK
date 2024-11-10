@@ -1,4 +1,4 @@
-<img src="https://github.com/user-attachments/assets/a90610ea-923a-4e8c-9211-8e278202811a" width="200px">
+<img src="https://github.com/usuario/repo/assets/logo.svg" alt="Logo">
 
 # EDUCAROCK 🎸📚
 

@@ -10,7 +10,7 @@
     <header>
         <div class="navbar">
           <div class="logo">
-            <a href="#sec_home"><img src="./assets/logo.svg" alt=""></a>
+            <a href="./educarockindex.html"><img src="./assets/logo.svg" alt=""></a>
           </div>
         </div>
       </header>
@@ -18,18 +18,16 @@
     <div class="container">
         <div class="container_login">
           <h1>Entre em sua conta!</h1>
-          <p>A música como guia, uma jornada constante de aprendizado e descoberta.</p>
+          <p id="text_debaixo">A música como guia, uma jornada constante de aprendizado e descoberta.</p>
           <div class="container_inputs">
             <div class="div_inputs">
             <p>Login</p>
             <input type="text" placeholder="Email">
             <p>Senha</p>
-            <input type="text" placeholder="*******">
+            <input type="password" placeholder="*******">
             </div>
-            <div class="login_button">
-              <button>Entre em sua Conta <img rc="./assets/Sign_in_circle.svg" alt=""></button>
-              <p>ainda não possui uma conta?</p>
-            </div>
+              <button>Entre em sua Conta <img id="sing_in" src="./assets/Sign_in_circle.svg" ></button>
+              <p onclick="window.location.href='./educaCadastro.html';"  tabindex="0" id="sem_conta">Ainda não possui uma conta?</p>
           </div>
         </div>
     </div>

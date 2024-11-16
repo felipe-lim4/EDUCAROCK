@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./cadastro.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+          <div class="logo">
+            <a href="./educarockindex.html"><img src="./assets/logo.svg" alt=""></a>
+          </div>
+        </div>
+      </header>
+    <section>
+    <div class="container">
+
+        <h1>Cadastre-se</h1>
+        <p id="text_debaixo">Melhore seu aprendizado, registre-se no EducaRock</p>
+     <div class="container_cadastro">
+        <div class="container_inputs">
+            <div class="div_inputs">
+            <p>Nome:</p>
+            <input id="input_nome" type="text" placeholder="Ex: Artur Duarte de Moraes">
+            <p>Email:</p>
+            <input id="input_email" type="text" placeholder="Ex: maysa.vitoria@gmail.com">
+            <p>Nome de Usuario:</p>
+            <input type="text" placeholder="Ex: El Grandioso Leon" id="input_nome_usuario">
+            </div>
+        </div>
+
+        <div class="container_inputs">
+            <div class="div_inputs">
+                <p>Senha:</p>
+                <input type="text" placeholder="******">
+                <p>Confirmação de senha:</p>
+                <input type="password" placeholder="*******">
+                <button>Cadastrar conta<img id="sing_in" src="./assets/Sign_in_circle.svg" ></button>
+                <p onclick="window.location.href='./educalogin.html';" tabindex="0" id="sem_conta">Ja possui uma conta?</p>
+                </div>  
+        </div>
+     </div>
+    </div>
+    </section>
+</body>
+</html>

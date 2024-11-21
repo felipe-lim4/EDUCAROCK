@@ -1,82 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Página Inicial</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-</head>
-
-<body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" href="./assets/logo.svg">
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">
+          <a href="#sec_home"><img src="./assets/logo.svg" alt=""></a>
+        </div>
+        <ul>
+          <li>
+            <a href="#sec_home">Sobre Nós</a>
           </li>
           <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
+            <a href="#sec_inspiracao">Historia</a>
           </li>
           <li>
-            <a href="cadastro.html">Cadastro</a>
+            <a href="#sec_lendas">Objetivo</a>
+          </li>
+          <li>
+            <a href="#sec_lendas_exemplo">Lendas</a>
+          </li>
+          <li>
+            <a href="#sec_quiz">Quiz</a>
           </li>
         </ul>
-      </div>
-    </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Preservando <span>hoje</span> para existirem <span>amanhã</span>.</p>
-      </div>
-    </div>
-  
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/planet-earth_color.png">
-            <h4>Missão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
-          </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
+        <div class="login_register">
+          <div class="login_register_buttons">
+            <span>|</span>
+            <button onclick="window.location.href='./login.html';"  class="login">Login</button>
+            <button onclick="window.location.href='./Cadastro.html';" class="registre-se">Registre-se</button>
           </div>
         </div>
       </div>
-    </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-        <span class="version">v1.0.0</span>
-      </div>
-    </div>
-  </body>
+    </header>
 
+    <main>
+      <section id= "sec_home" class="home">
+        <div class="container_home">
+          <div class="home_left">
+            <h1>As lendas do rock <span>ensinam</span> você!</h1>
+            <p>
+              Até mesmo os grandes do rock estudaram muito para chegar lá!
+              Estude como um grande e grande você será.
+            </p>
+            <button onclick="window.location.href='#sec_lendas';">Como aprender?</button>
+          </div>
+          <div class="homeRight">
+            <img src="../EDUCAROCK/assets/meninoHome.svg" alt="" />
+          </div>
+        </div>
+      </section>
+      <section id="sec_inspiracao" class="inspiracao">
+        <div class="constainer_inspiracao">
+          <div class="inspiracao_lipe">
+            <img src="../EDUCAROCK/assets/felipinhooo.svg" alt="" />
+          </div>
+          <div class="inspiracao_text">
+            <h1>A Inspiração Pessoal</h1>
+            <p>
+              O <span>EDUCAROCK</span> surgiu da minha trajetória pessoal com a
+              música e o rock. Inicialmente, eu não tinha apreço pelo estudo e
+              desconhecia métodos eficazes de aprendizagem. Com o tempo, percebi
+              que o aprendizado exige uma abordagem <span>ATIVA</span> e
+              <span>CONSTANTE</span>. Assim, substituí as aulas de guitarra por
+              uma prática independente e rigorosa, fundamentada em constância,
+              <span>RESILIÊNCIA</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="sec_sobre_nos" class="sobre_nos">
+        <div class="container_sobre_nos">
+          <div class="sobre_nos_text">
+            <h1>Sobre Nós</h1>
+            <p>
+              O <span>EDUCAROCK</span> é uma plataforma educacional sem fins
+              lucrativos, voltada para promover a constância e disciplina no
+              estudo da música, especialmente o rock. O projeto incentiva o
+              desenvolvimento por meio de dois recursos principais:
+              <p><span>1. Registro de Horas de Estudo: </span>Gráficos de
+                produtividade diária ajudam os usuários a acompanhar seu progresso
+                e manter a prática constante.</p>
+              <p>
+                <span>2. Ranking dos Mais Produtivos:</span> Um
+              ranking com os usuários mais dedicados, incentivando o compromisso
+              com o aprendizado.
+              </p>
+            </p>
+          </div>
+          <div class="sobre_nos_mobile">
+            <img src="../EDUCAROCK/assets/iPhone 16 Pro.svg" alt="" />
+          </div>
+        </div>
+      </section>
+      <section id="sec_lendas">
+        <div class="container_lendas">
+          <div class="caixa_lenda">
+            <h1>
+              Como as lendas são formadas?
+            </h1>
+            <p>As lendas nascem de histórias que mostram como enfrentamos desafios. Dificuldade é um sinal de que estamos no caminho certo, porque aprender é um processo longo e cheio de perrengues. Como disse o Chorão, ex-vocalista da banda Charlie Brown Jr.: 'Eu faço da <span>dificuldade</span> a minha <span>motivação</span>. A volta por cima vem na continuação.' Para quem estuda música, essa frase é um lembrete de que passar por dificuldades é parte do jogo e faz a gente <span>crescer</span>.</p>
+          </div>
+        </div>
+      </section>
+      <section id="sec_lendas_exemplo" class="lenda_exemplo">
+        <div class="container_lenda_exemplo">
+          <div class="lendas_fotos">
+
+            <div>
+              <h1>Eloy Casagrande</h1>
+              <img src="../EDUCAROCK/assets/eloy.svg" alt="">
+              
+            </div>
+
+            <div>
+              <h1>Eddie Vedder</h1>
+              <img src="../EDUCAROCK/assets/eddie.svg" alt="">
+            </div>
+
+            <div>
+              <h1>Alexandre Magno</h1>
+              <img src="../EDUCAROCK/assets/choris.svg" alt="">
+            </div>
+
+          </div>
+          <div class="lendas_texto">
+            <div>
+              <p>“Eu gosto de estudar todos os dias. Eu gosto de estar em contato com a bateria“</p>
+            </div>
+            <div>
+              <p>“ eu estava totalmente sozinho – exceto pela música”</p>
+            </div>
+            <div>
+              <p>“ A gente encontra o sentido da vida através de nosso trabalho”</p>
+            </div>
+          </div>
+          <div class="realize_quiz">
+            <h1>Como medir meu conhecimento?</h1>
+            <img src="./assets/seta.png">
+          </div>
+        </div>
+      </section>
+      <section class="sec_quiz" id="sec_quiz">
+        <div class="container_quiz">
+          <div class="caixa_quiz">
+            <div class="text_quiz">
+              <h1>Realize o quiz e teste seu conhecimento musical</h1>
+              <p>Demonstre sua constancia e fique no topo de nosso ranking</p>
+            </div>
+            <div class="button_quiz">
+              <button>
+                Começar agora!
+              </button>
+            </div>
+          </div>
+        </div>                                                                                                                                                                           
+        <footer>
+          <div class="container_footer">
+            <div class="footer_cima">
+               <a href="#sec_home"><img src="./assets/logo_footer.svg" alt=""></a>
+              <div>
+                <a href="https://www.instagram.com/lima_cz/"><img src="./assets/insta.svg" alt=""></a>
+                <a href="https://www.linkedin.com/in/felipe-acbb/"><img src="./assets/linkedolas.svg" alt=""></a>
+                <a href="https://github.com/felipe-lim4"><img src="./assets/git.svg" alt=""></a>
+              </div>
+            </div>
+            <div class="direitos">
+              <div class="termos">
+                <ul>
+                  <li>
+                    Termos de serviço
+                  </li>
+                  <li>
+                    |
+                  </li>
+                  <li>
+                    Configurações de Cookies
+                  </li>
+                  <li>
+                    |
+                  </li>
+                  <li>
+                    Política de Privacidade
+                  </li>
+                </ul>
+              </div>
+              <div class="reservados">
+                <p>© 2024 EducaRock. Todos os direitos reservados</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </body>
 </html>
+
+
+
+<script>
+
+  
+</script>

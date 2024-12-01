@@ -216,3 +216,8 @@ button:active {
     height: 100%;
     gap: 50px;
 }
+
+::-webkit-scrollbar {
+    width: 12px; 
+    height: 12px;
+  }

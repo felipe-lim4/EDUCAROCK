@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/login.css">
+    <link rel="icon" href="./assets/logo.svg">
 </head>
 <body>
     <header>
         <div class="navbar">
           <div class="logo">
-            <a href="./educarockindex.html"><img src="../assets/Educa Rock.svg" alt=""></a>
+            <a href="./index.html"><img src="./assets/logo.svg" alt=""></a>
           </div>
         </div>
       </header>
@@ -27,7 +28,7 @@
             <input id="senha_input" type="password" placeholder="*******">
             </div>
               <button onclick="entrar()">Entre em sua Conta <img id="sing_in" src="./assets/Sign_in_circle.svg" ></button>
-              <p onclick="window.location.href='./educaCadastro.html';"  tabindex="0" id="sem_conta">Ainda não possui uma conta?</p>
+              <p onclick="window.location.href='./cadastro.html';"  tabindex="0" id="sem_conta">Ainda não possui uma conta?</p>
           </div>
         </div>
     </div>
@@ -76,7 +77,7 @@ function entrar() {
                     sessionStorage.USER_NAME = json.username;
                     
                     setTimeout(function () {
-                        window.location = "./index.html";
+                        window.location = "./inicial.html";
                     }, 1000); // Apenas para simular um tempo de resposta
                 });
 

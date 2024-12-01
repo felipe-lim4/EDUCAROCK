@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/logo.svg" />
+    <link rel="stylesheet" href="./css/style_inicial.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">
+          <a href="./index.html"><img src="./assets/logo.svg" alt="" /></a>
+        </div>
+        <ul class="navbar_options">
+          <li>
+            <a href="">Lendas</a>
+          </li>
+          <a href="./estudo.html">Estudo</a>
+          <li>
+            <a href="">Realizar Quiz</a>
+          </li>
+          <li>
+            <a href="">dashboard Estudo</a>
+          </li>
+        </ul>
+        <div id="bem_vindo">
+          <p>Seja Bem vindo <span>USUARIO!</span></p>
+          <img src="" alt="" />
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <main class="main-container">
+        <div class="main-cards">
+          <div class="card" id="mediaDiaria">
+            <h3>Media acertos por tentativa</h3>
+            <div class="card-inner">
+              <h1>9</h1>
+            </div>
+          </div>
+
+        
+          
+          <div class="card" id="mediaDiariaUsuarios">
+            <h3>Media de acertos dos usuarios</h3>
+            <div class="card-inner">
+              <h1>5,5</h1>
+            </div>
+          </div>
+
+
+        
+          <div class="card">
+            <h3>Media de estudo usuarios (semanal)</h3>
+            <div class="card-inner" id="mediaSemanalUsuarios">
+              <h1>?HORAS</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts">
+          <div class="charts-card">
+            <h2 class="chart-title">Horas Estudadas por Dia</h2>
+            <div id="area-chart">
+              <canvas id="graficoEstudo"></canvas>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </body>
+</html>
+
+<script>
+  window.onload = function () {
+    geraGrafico();
+  };
+
+  function geraGrafico() {
+    const data = {
+      labels: [7, 6, 5, 4, 3, 2, 1],
+      datasets: [
+        {
+          label: "pega no meu ovo hard",
+          data: [3, 3, 1, 1, 8, 7, 5],
+          fill: true,
+          borderColor: "#06011B",
+        },
+        {
+          label: "Chupetina",
+          data: [3, 2, 5, 1, 0, 3, 0],
+          fill: true,
+          borderColor: "#A90F0F",
+        },
+      ],
+    };
+
+    const config = {
+      type: "line",
+      data: data,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            grid: {
+              color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
+            },
+            border: {
+              color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo X
+              width: 0.1, // Espessura da linha do eixo X
+            },
+          },
+          y: {
+            grid: {
+              color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo Y
+            },
+            border: {
+              color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo Y
+              width:  0.1, // Espessura da linha do eixo Y
+            },
+          },
+        },
+      },
+    };
+
+    const graficoQtdEstudo = new Chart(
+      document.getElementById("graficoEstudo"),
+      config
+    );
+  }
+</script>

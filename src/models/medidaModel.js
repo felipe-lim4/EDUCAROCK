@@ -1,35 +1,33 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
+function buscarHorasEstudo(idUsuario) {
 
-    var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    FROM medida
-                    WHERE fk_aquario = ${idAquario}
-                    ORDER BY id DESC LIMIT ${limite_linhas}`;
+    var instrucaoSql = `select DataEstudo, qtdHora 
+        from estudo 
+            where week(DataEstudo) = week(curdate()) and fkUsuario = ${idUsuario}
+            order by DataEstudo desc limit 7;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarHorasEstudoUsuarios() {
 
     var instrucaoSql = `SELECT 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        FROM medida WHERE fk_aquario = ${idAquario} 
-                    ORDER BY id DESC LIMIT 1`;
+    DATE(DataEstudo) AS dia,
+    SUM(qtdHora) AS totalHorasEstudadas
+        FROM estudo
+        WHERE week(DataEstudo) = week(curdate())
+        GROUP BY dia
+        ORDER BY dia;
+        `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarHorasEstudo,
+    buscarHorasEstudoUsuarios
 }

@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./assets/logo.svg" />
     <link rel="stylesheet" href="./css/style_inicial.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+    <!-- Carregar o Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Carregar o adaptador date-fns para o Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
     <title>Document</title>
   </head>
   <body>
@@ -28,7 +32,8 @@
           </li>
         </ul>
         <div id="bem_vindo">
-          <p>Seja Bem vindo <span>USUARIO!</span></p>
+          <p>Seja Bem vindo <br><span id="usuario">USUARIO!</span></p>
+          
           <img src="" alt="" />
         </div>
       </div>
@@ -40,7 +45,7 @@
           <div class="card" id="mediaDiaria">
             <h3>Media de estudo (Dia)</h3>
             <div class="card-inner">
-              <h1>?HORAS</h1>
+              <h1 id="KPIMediaEstudo">?HORAS</h1>
             </div>
           </div>
 
@@ -106,28 +111,110 @@
 </html>
 
 <script>
+
   window.onload = function () {
-    geraGrafico();
+    buscarMedidasGrafico();
+    buscarMedidasUsuarios();
   };
 
-  function geraGrafico() {
+
+  function comparaDatas(data1, data2) {
+  // Cria dois objetos Date, se já não forem objetos Date
+  const date1 = new Date(data1);
+  const date2 = new Date(data2);
+
+  // Comparando as datas (ignora horas, minutos, segundos e milissegundos)
+  return ((date1.toISOString().split('T')[0]) == date2.toISOString().split('T')[0]);
+  }
+
+
+
+  function buscarHorasEstudoUsuarios(){
+    fetch(`/medidas/estudoUsuarios/`, { cache: "no-store" })
+
+          .then(function (response) {
+            if (response.ok) {
+              response.json().then(function (resposta) {
+                console.log(resposta)
+              });
+              
+            } else {
+              console.error("Nenhum dado encontrado ou erro na API");
+            }
+          })
+          .catch(function (error) {
+            console.error(
+              `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+            );
+          });
+
+  }
+
+
+
+
+
+  function geraGrafico(resposta) {
+    var nomeUsuario = sessionStorage.USER_NAME
+    usuario.innerHTML = nomeUsuario.toUpperCase() + '!'
     const data = {
-      labels: [7, 6, 5, 4, 3, 2, 1],
+      labels: [],
       datasets: [
         {
-          label: "pega no meu ovo hard",
-          data: [3, 3, 1, 1, 8, 7, 5],
+          label: `${nomeUsuario}`,
+          data: [],
           fill: true,
           borderColor: "#06011B",
         },
         {
-          label: "Chupetina",
-          data: [3, 2, 5, 1, 0, 3, 0],
+          label: "Usuarios",
+          data: [],
           fill: true,
           borderColor: "#A90F0F",
         },
       ],
     };
+
+
+    let dadosEstudos = resposta.reverse()
+    
+
+    //kpi
+
+    var somaHoras = 0
+
+
+    // insert de data de estudo
+    const hoje = new Date();
+    hoje.setDate(hoje.getDate() - 7);
+    
+    var indexEstudo = 0
+
+    for (let i = 0; i < 7; i++) {
+
+      var dataFormatada = hoje.toISOString();
+      
+      if(comparaDatas(dadosEstudos[indexEstudo].DataEstudo, dataFormatada ) && indexEstudo < dadosEstudos.length){
+
+        data.labels.push(dadosEstudos[indexEstudo].DataEstudo)
+        data.datasets[0].data.push(dadosEstudos[indexEstudo].qtdHora)
+        somaHoras += dadosEstudos[indexEstudo].qtdHora
+        indexEstudo++
+
+      }else{
+
+        data.labels.push(dataFormatada)
+        data.datasets[0].data.push(0)
+        
+      }
+
+      hoje.setDate(hoje.getDate() + 1)
+    }
+    
+
+    var kpiMediaEstudo = somaHoras/7;
+    KPIMediaEstudo.innerHTML = parseInt(kpiMediaEstudo) + ' Horas'
+
 
     const config = {
       type: "line",
@@ -136,6 +223,14 @@
         responsive: true,
         scales: {
           x: {
+            type: "time", // Escala baseada no tempo
+            time: {
+            unit: "day", // Ajustar unidade (dia, mês, hora, etc.)
+            tooltipFormat: "MM dd, yyyy", // Formato do tooltip
+            displayFormats: {
+            day: "MM/dd", // Formato da exibição no eixo X
+              },
+            },
             grid: {
               color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
             },
@@ -144,6 +239,7 @@
               width: 0.1, // Espessura da linha do eixo X
             },
           },
+
           y: {
             grid: {
               color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo Y
@@ -162,4 +258,33 @@
       config
     );
   }
+
+
+
+  function buscarMedidasGrafico(){
+    const idUsuario = sessionStorage.ID_USUARIO
+
+    fetch(`/medidas//ultimas/${idUsuario}`, { cache: "no-store" })
+
+          .then(function (response) {
+            if (response.ok) {
+              response.json().then(function (resposta) {
+                console.log(resposta)
+                geraGrafico(resposta)
+              });
+              
+            } else {
+              console.error("Nenhum dado encontrado ou erro na API");
+            }
+          })
+          .catch(function (error) {
+            console.error(
+              `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+            );
+          });
+  }
+
+
+
 </script>
+

@@ -43,7 +43,7 @@
       <main class="main-container">
         <div class="main-cards">
           <div class="card" id="mediaDiaria">
-            <h3>Media de estudo (Dia)</h3>
+            <h3>Media de estudo (7 Dias)</h3>
             <div class="card-inner">
               <h1 id="KPIMediaEstudo">?HORAS</h1>
             </div>
@@ -51,25 +51,25 @@
 
           <!-- Tempo fora da condição ideal (Temperatura) -->
           <div class="card" id="mediaSemanal">
-            <h3>Media de estudo (semanal)</h3>
+            <h3>Quantidade em horas de estudo (7 Dias)</h3>
             <div class="card-inner">
-              <h1>?HORAS</h1>
+              <h1 id="KPI_qtd_estudo_semanal_usuario">?HORAS</h1>
             </div>
           </div>
 
           <!-- Umidade Atual -->
           <div class="card" id="mediaDiariaUsuarios">
-            <h3>Media de estudo usuarios (dia)</h3>
+            <h3>Media de estudo usuarios (7 Dias)</h3>
             <div class="card-inner">
-              <h1>?HORAS</h1>
+              <h1 id="KPIMediaTodos">?HORAS</h1>
             </div>
           </div>
 
           <!-- Tempo fora da condição ideal (Umidade) -->
           <div class="card">
-            <h3>Media de estudo usuarios (semanal)</h3>
+            <h3>Quantidade em horas de estudo usuarios (7 Dias)</h3>
             <div class="card-inner" id="mediaSemanalUsuarios">
-              <h1>?HORAS</h1>
+              <h1 id="KPI_qtd_estudo_semanal_todos" >?HORAS</h1>
             </div>
           </div>
         </div>
@@ -84,24 +84,24 @@
 
           <div class="card-ranking">
             <div class="ranking-item">
-              <p class="name">1. Artur Duarte</p>
-              <p class="hours">50 horas</p>
+              <p id="0Lugar" class="name">1. Artur Duarte</p>
+              <p id="0qtd" class="hours">50 horas</p>
             </div>
             <div class="ranking-item">
-              <p class="name">2. Guilherme Roveri</p>
-              <p class="hours">45 horas</p>
+              <p id="1Lugar" class="name">2. Guilherme Roveri</p>
+              <p id="1qtd" class="hours">45 horas</p>
             </div>
             <div class="ranking-item">
-              <p class="name">3. João Silva</p>
-              <p class="hours">40 horas</p>
+              <p id="2Lugar" class="name">3. João Silva</p>
+              <p id="2qtd" class="hours">40 horas</p>
             </div>
             <div class="ranking-item">
-              <p class="name">4. Murillo Reis</p>
-              <p class="hours">35 horas</p>
+              <p id="3Lugar" class="name">4. Murillo Reis</p>
+              <p id="3qtd" class="hours">35 horas</p>
             </div>
             <div class="ranking-item">
-              <p class="name">5. Felipe Lima</p>
-              <p class="hours">30 horas</p>
+              <p id="4Lugar" class="name">5. Felipe Lima</p>
+              <p id="4qtd" class="hours">30 horas</p>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
 
   window.onload = function () {
     buscarMedidasGrafico();
-    buscarMedidasUsuarios();
+    buscarRank();
   };
 
 
@@ -128,34 +128,9 @@
   }
 
 
-
-  function buscarHorasEstudoUsuarios(){
-    fetch(`/medidas/estudoUsuarios/`, { cache: "no-store" })
-
-          .then(function (response) {
-            if (response.ok) {
-              response.json().then(function (resposta) {
-                console.log(resposta)
-              });
-              
-            } else {
-              console.error("Nenhum dado encontrado ou erro na API");
-            }
-          })
-          .catch(function (error) {
-            console.error(
-              `Erro na obtenção dos dados p/ gráfico: ${error.message}`
-            );
-          });
-
-  }
-
-
-
-
-
   function geraGrafico(resposta) {
     var nomeUsuario = sessionStorage.USER_NAME
+    // nome do usuario no canto superior
     usuario.innerHTML = nomeUsuario.toUpperCase() + '!'
     const data = {
       labels: [],
@@ -174,32 +149,36 @@
         },
       ],
     };
-
-
-    let dadosEstudos = resposta.reverse()
+    let dadosUsuario = resposta.usuario.reverse()
+    let dadosTodosUsuarios = resposta.todosUsuarios
     
 
     //kpi
 
     var somaHoras = 0
-
+    var somaHorasTodos = 0
 
     // insert de data de estudo
     const hoje = new Date();
     hoje.setDate(hoje.getDate() - 7);
     
-    var indexEstudo = 0
+    var indexEstudoUsuario = 0
+    var indexEstudoTodosUsuarios = 0
+
 
     for (let i = 0; i < 7; i++) {
 
-      var dataFormatada = hoje.toISOString();
+      var dataFormatada = hoje.toISOString().split('T')[0];
+    
       
-      if(comparaDatas(dadosEstudos[indexEstudo].DataEstudo, dataFormatada ) && indexEstudo < dadosEstudos.length){
-
-        data.labels.push(dadosEstudos[indexEstudo].DataEstudo)
-        data.datasets[0].data.push(dadosEstudos[indexEstudo].qtdHora)
-        somaHoras += dadosEstudos[indexEstudo].qtdHora
-        indexEstudo++
+      if( indexEstudoUsuario < dadosUsuario.length 
+      && comparaDatas(dadosUsuario[indexEstudoUsuario].DataEstudo, dataFormatada )){
+        
+        data.labels.push(dataFormatada)
+        data.datasets[0].data.push(dadosUsuario[indexEstudoUsuario].qtdHora)
+        somaHoras += dadosUsuario[indexEstudoUsuario].qtdHora
+    
+        indexEstudoUsuario++
 
       }else{
 
@@ -208,14 +187,31 @@
         
       }
 
+
+      if( indexEstudoTodosUsuarios < dadosTodosUsuarios.length &&
+        comparaDatas(dadosTodosUsuarios[indexEstudoTodosUsuarios].dia, dataFormatada ) 
+
+        ){
+
+          data.datasets[1].data.push(Number(dadosTodosUsuarios[indexEstudoTodosUsuarios].totalHorasEstudadas))
+
+          somaHorasTodos += Number(dadosTodosUsuarios[indexEstudoTodosUsuarios].totalHorasEstudadas)
+          indexEstudoTodosUsuarios++
+          
+      }else{
+        data.datasets[1].data.push(0)
+      }
+
       hoje.setDate(hoje.getDate() + 1)
     }
     
 
     var kpiMediaEstudo = somaHoras/7;
     KPIMediaEstudo.innerHTML = parseInt(kpiMediaEstudo) + ' Horas'
-
-
+    var kpiMediaTodos = somaHorasTodos/7
+    KPIMediaTodos.innerHTML = parseInt(kpiMediaTodos) + ' Horas'
+    KPI_qtd_estudo_semanal_usuario.innerHTML = somaHoras + ' Horas'
+    KPI_qtd_estudo_semanal_todos.innerHTML = somaHorasTodos + ' Horas'
     const config = {
       type: "line",
       data: data,
@@ -223,14 +219,16 @@
         responsive: true,
         scales: {
           x: {
-            type: "time", // Escala baseada no tempo
-            time: {
-            unit: "day", // Ajustar unidade (dia, mês, hora, etc.)
-            tooltipFormat: "MM dd, yyyy", // Formato do tooltip
+          type: 'time', // Eixo X baseado em tempo
+          time: {
+            unit: 'day', // Unidade de tempo: dias
             displayFormats: {
-            day: "MM/dd", // Formato da exibição no eixo X
-              },
+              day: 'MM/dd', // Formato MM/DD para labels
             },
+          },
+          ticks: {
+            source: 'labels', // Usa as labels fornecidas
+          },
             grid: {
               color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
             },
@@ -264,7 +262,7 @@
   function buscarMedidasGrafico(){
     const idUsuario = sessionStorage.ID_USUARIO
 
-    fetch(`/medidas//ultimas/${idUsuario}`, { cache: "no-store" })
+    fetch(`/medidas/ultimas/${idUsuario}`, { cache: "no-store" })
 
           .then(function (response) {
             if (response.ok) {
@@ -282,6 +280,42 @@
               `Erro na obtenção dos dados p/ gráfico: ${error.message}`
             );
           });
+  }
+
+  function geraRank(resposta){
+    let ranking = resposta
+
+    console.log(ranking[0].Usuario)
+    console.log(ranking[0].TotalHorasEstudadas)
+    for(let i = 0; i < 5; i++){
+      var idNome =  i+'Lugar'
+      var idHoras = i+'qtd'
+
+    document.getElementById(idNome).innerHTML = ranking[i].Usuario;
+    document.getElementById(idHoras).innerHTML = ranking[i].TotalHorasEstudadas;
+    }
+  }
+
+
+  function buscarRank(){
+    fetch(`/medidas/rank/`, { cache: "no-store" })
+
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(resposta)
+            geraRank(resposta)
+          });
+          
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
   }
 
 

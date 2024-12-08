@@ -27,7 +27,42 @@ function buscarHorasEstudoUsuarios() {
 }
 
 
+function buscarRank(){
+
+    var instrucaoSql = `SELECT 
+            usuario.nome AS Usuario,
+            COALESCE(SUM(estudo.qtdHora), 0) AS TotalHorasEstudadas
+        FROM 
+            usuario
+        LEFT JOIN  
+            estudo ON estudo.fkUsuario = usuario.idUsuario 
+            AND WEEK(estudo.DataEstudo) = WEEK(CURDATE())
+        GROUP BY 
+            usuario.nome
+        ORDER BY 
+            TotalHorasEstudadas desc
+            limit 5;
+        `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function inserirHoras(fkUsuario, DataEstudo, qtdHora){
+
+    var instrucaoSql = `INSERT INTO estudo (fkUsuario, DataEstudo, qtdHora) 
+    VALUES (${fkUsuario}, '${DataEstudo}', ${qtdHora}) 
+    ON DUPLICATE KEY UPDATE 
+    DataEstudo = VALUES(DataEstudo), 
+    qtdHora = qtdHora + VALUES(qtdHora);`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarHorasEstudo,
-    buscarHorasEstudoUsuarios
+    buscarHorasEstudoUsuarios,
+    buscarRank,
+    inserirHoras
 }

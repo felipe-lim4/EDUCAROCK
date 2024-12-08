@@ -21,7 +21,7 @@
           <li><a href="">Resultados Quiz</a></li>
         </ul>
         <div id="bem_vindo">
-          <p>Seja bem-vindo, <span>USUÁRIO!</span></p>
+          <p>Seja Bem vindo <br><span id="usuario">USUARIO!</span></p>
         </div>
       </div>
     </header>
@@ -52,7 +52,16 @@
 </html>
 
 <script>
+
+
+  var nomeUsuario = sessionStorage.USER_NAME
+    // nome do usuario no canto superior
+  usuario.innerHTML = nomeUsuario.toUpperCase() + '!'
+  
 function registraHora(){
+  
+
+
   var horas = Number(horas_inserir.value)
   console.log(horas) 
   var idUsuario = sessionStorage.ID_USUARIO

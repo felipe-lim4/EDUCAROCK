@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./assets/logo.svg" />
     <link rel="stylesheet" href="./css/style_inicial.css" />
-    <!-- Carregar o Chart.js -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Carregar o adaptador date-fns para o Chart.js -->
+
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 
     <title>Document</title>
@@ -40,21 +40,21 @@
       <main class="main-container">
         <div class="main-cards">
           <div class="card" id="mediaDiaria">
-            <h3>Media de estudo (7 Dias)</h3>
+            <h3>Media de estudo diaria (ultimos 7 Dias)</h3>
             <div class="card-inner">
               <h1 id="KPIMediaEstudo">?HORAS</h1>
             </div>
           </div>
 
-          <!-- Tempo fora da condição ideal (Temperatura) -->
+   
           <div class="card" id="mediaSemanal">
-            <h3>Quantidade em horas de estudo (7 Dias)</h3>
+            <h3>Horas estudadas (ultimos 7 Dias)</h3>
             <div class="card-inner">
               <h1 id="KPI_qtd_estudo_semanal_usuario">?HORAS</h1>
             </div>
           </div>
 
-          <!-- Umidade Atual -->
+
           <div class="card" id="mediaDiariaUsuarios">
             <h3>Media de estudo usuarios (7 Dias)</h3>
             <div class="card-inner">
@@ -62,9 +62,9 @@
             </div>
           </div>
 
-          <!-- Tempo fora da condição ideal (Umidade) -->
+
           <div class="card">
-            <h3>Quantidade em horas de estudo usuarios (7 Dias)</h3>
+            <h3>Horas estudadas pelos usuarios (7 Dias)</h3>
             <div class="card-inner" id="mediaSemanalUsuarios">
               <h1 id="KPI_qtd_estudo_semanal_todos" >?HORAS</h1>
             </div>
@@ -116,11 +116,11 @@
 
 
   function comparaDatas(data1, data2) {
-  // Cria dois objetos Date, se já não forem objetos Date
+
   const date1 = new Date(data1);
   const date2 = new Date(data2);
 
-  // Comparando as datas (ignora horas, minutos, segundos e milissegundos)
+
   return ((date1.toISOString().split('T')[0]) == date2.toISOString().split('T')[0]);
   }
 

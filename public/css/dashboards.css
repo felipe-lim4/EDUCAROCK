@@ -109,7 +109,7 @@ body {
   margin-left: 30px;
 }
 
-/* pagina graficos */
+
 
 .dash-header {
   background-color: #212124;
@@ -126,7 +126,7 @@ body {
 }
 
 .area-parametros-alerta {
-  /* border: 2px solid pink; */
+
   display: flex;
   flex-direction: column;
   width: 70%;

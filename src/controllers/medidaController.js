@@ -8,13 +8,13 @@ function buscarHorasEstudo(req, res) {
     medidaModel.buscarHorasEstudo(idUsuario)
     .then(function (resultadoUsuario) {
 
-      if (resultadoUsuario.length > 0) {
+      if (resultadoUsuario.length >= 0) {
 
         medidaModel.buscarHorasEstudoUsuarios()
           .then(function (resultadoTodosUsuarios) {
 
 
-            if (resultadoTodosUsuarios.length > 0) {
+            if (resultadoTodosUsuarios.length >= 0) {
               res.status(200).json({
 
                 usuario: resultadoUsuario,

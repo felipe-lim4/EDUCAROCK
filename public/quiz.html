@@ -131,12 +131,12 @@
         alternativaCorreta: "alternativaA"
     },
     {
-        pergunta: "Qual banda de rock brasileira fez mais sucesso durante os anos 2000, conquistando uma enorme base de fãs e emplacando hits como 'Tamo ai na Atividade'?",
-            alternativaA: "Legião Urbana",
-            alternativaB: "Charlie Brown Jr.",
-            alternativaC: "Os Mutantes",
-            alternativaD: "Titãs",
-            alternativaCorreta: "alternativaB"
+        pergunta: "Qual banda de rock brasileira ficou conhecida por seu estilo irreverente e hits como 'Mulher de Fases' nos anos 2000?",
+        alternativaA: "Capital Inicial",
+        alternativaB: "Raimundos",
+        alternativaC: "Os Paralamas do Sucesso",
+        alternativaD: "Skank",
+        alternativaCorreta: "alternativaB"
     },
     {
         pergunta: "Qual é a função da palheta na guitarra elétrica?",
@@ -199,7 +199,7 @@
             padding: "2em",
             color: "#fff",
             background: "#06011B ",
-            backdrop: `#2A253E`,
+            backdrop: `radial-gradient(circle, rgba(21,58,143,1) 0%, rgba(6,1,27,1) 74%);`,
             confirmButtonColor: '#A90F0F',
             cancelButtonColor:'#2A253E'
 
@@ -207,13 +207,13 @@
         }).then(function (result) {
 
             if (result.isConfirmed) {
-                window.location.href = "quiz.html";
                 enviar()
+                window.location.href = "quiz.html";
+                
 
             } else {
-                window.location.href = "dashboard.html";
                 enviar()
-
+                window.location.href = "dashboard.html";
             }
         });
     }

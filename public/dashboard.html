@@ -20,12 +20,9 @@
           <a href="./index.html"><img src="./assets/logo.svg" alt="" /></a>
         </div>
         <ul class="navbar_options">
-          <li>
-            <a href="">Lendas</a>
-          </li>
-          <a href="./estudo.html">Estudo</a>
-          <li>
-            <a href="">Realizar Quiz</a>
+          <li><a href="./estudo.html">Estudo</a></li>
+          <li><a href="./dashboard.html" style="background-color: #A90F0F;">Dashboard</a></li>
+            <a href="quiz.html">Realizar Quiz</a>
           </li>
           <li>
             <a href="">Resultados Quiz</a>
@@ -159,8 +156,9 @@
     var somaHorasTodos = 0
 
     // insert de data de estudo
-    const hoje = new Date();
-    hoje.setDate(hoje.getDate() - 7);
+    const now = new Date();
+    now.setDate(now.getDate() - 6);
+    now.setHours(now.getHours() + -3);
     
     var indexEstudoUsuario = 0
     var indexEstudoTodosUsuarios = 0
@@ -168,7 +166,8 @@
 
     for (let i = 0; i < 7; i++) {
 
-      var dataFormatada = hoje.toISOString().split('T')[0];
+      var dataFormatada = now.toISOString().split('T')[0];
+      console.log(dataFormatada)
     
       
       if( indexEstudoUsuario < dadosUsuario.length 
@@ -202,7 +201,7 @@
         data.datasets[1].data.push(0)
       }
 
-      hoje.setDate(hoje.getDate() + 1)
+      now.setDate(now.getDate() + 1)
     }
     
 
@@ -269,6 +268,7 @@
               response.json().then(function (resposta) {
                 console.log(resposta)
                 geraGrafico(resposta)
+
               });
               
             } else {
@@ -285,8 +285,6 @@
   function geraRank(resposta){
     let ranking = resposta
 
-    console.log(ranking[0].Usuario)
-    console.log(ranking[0].TotalHorasEstudadas)
     for(let i = 0; i < 5; i++){
       var idNome =  i+'Lugar'
       var idHoras = i+'qtd'

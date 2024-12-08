@@ -63,11 +63,11 @@ insert into estudo (fkUsuario, DataEstudo, qtdHora) values
     
 update estudo set qtdHora = ifnull(qtdHora, 0) + 20 where fkUsuario = 8 and dataEstudo = curdate();
 
-select * from estudo;
+select * from usuario;
 delete from estudo where idEstudo >= 8;
 
 select DataEstudo, qtdHora from estudo 
-where week(DataEstudo) = week(curdate())  and fkUsuario = 8
+where week(DataEstudo) = week(curdate())  and fkUsuario = 6
 order by DataEstudo limit 7;
 
 
@@ -115,8 +115,8 @@ GROUP BY
 ORDER BY 
     TotalHorasEstudadas desc
     limit 5;
-
-upda
+use educarock;
+delete from usuario where idUsuario = 5;
 
 
 

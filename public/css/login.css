@@ -190,3 +190,11 @@ button:active {
 #sing_in{
     height: 45px;
 }
+
+.swal2-confirm{
+    width: 200px !important; /* Largura maior */
+    height: 50px;            /* Altura opcional */
+    font-size: 16px;         /* Ajuste o tamanho da fonte */
+    padding: 10px;           /* Espaçamento interno */
+    text-align: center;      /* Centraliza o texto */
+  }

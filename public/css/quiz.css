@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+/* Estilo do corpo da página */
+body {
+    background-image: url('../images/corinthians/festaTorcida.webp');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    margin: 0; 
+    flex-direction: column;
+    color: var(--color-primary-4); 
+    width: 100%;
+    background-color: #06011B;
+}
+main{
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.conteiner{
+    background-color: #A90F0F;
+    width: 100%;
+    height:450px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #ffffffec;
+}
+
+.finsh{
+    display: none;
+}
+
+.conteiner h2{
+    margin-bottom: 15px;
+    margin-top: 0px;
+    font-size: 32px;
+}
+
+.conteiner div{
+    color: #ffffff;
+    font-size: 20px;
+}
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #06011B;
+    cursor: pointer;
+    border-style: none;
+    border-radius: 8px;
+    width: 400px;
+    height: 60px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    transition: transform 0.4s ease;
+}
+
+
+
+button:hover{
+    color: #FFFFFF; 
+    background-color:rgba(6, 1, 27, 1.0); 
+    transform: scale(1.03);
+}
+
+button:active {
+    transform: scale(1.0); /* Efeito de "apertar" */
+    background-color: #2A253E; /* Tom mais escuro ao clicar */
+  }
+
+.anwsers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.btn_alternatives {
+    margin: 7px;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    #pontuacao, #jogo {
+        width: 100%;
+        max-width: none;
+    }
+    #btnIniciarQuiz {
+        width: 100%;
+    }
+}

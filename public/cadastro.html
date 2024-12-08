@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/cadastro.css">
     <link rel="icon" href="./assets/logo.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
@@ -35,7 +37,7 @@
         <div class="container_inputs">
             <div class="div_inputs">
                 <p>Senha:</p>
-                <input id="senha_input" type="text" placeholder="******">
+                <input id="senha_input" type="password" placeholder="******">
                 <p>Confirmação de senha:</p>
                 <input id="confirmacao_senha_input" type="password" placeholder="*******">
                 <button onclick="cadastrar()">Cadastrar conta<img id="sing_in" src="./assets/Sign_in_circle.svg" ></button>
@@ -49,9 +51,18 @@
 </html>
 
 <script>
-
+  function containsInvalidCharacters(str) {
+    const invalidChars = "#%&*!(){}[]<>/\\|^~`";
+    for (let i = 0; i < str.length; i++) {
+      if (invalidChars.indexOf(str[i]) !== -1) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   function cadastrar() {
+
 
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
@@ -67,13 +78,111 @@
       senhaVar == "" ||
       usernameVar == ""
     ) {
-      console.log("(Mensagem de erro para todos os campos em branco)");
-            return false;   
+      Swal.fire({
+        title: "Ops!",
+        text: "Por favor, preencha todos os campos.",
+        icon: "error",
+        width: 400,
+        padding: "1em",
+        color: "#2A253E",
+        background: "#FFFFFF",
+        backdrop: `rgba(78, 54, 41, 0.5)`,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#A90F0F',
+        willOpen: () => {
+          document.querySelector('.swal2-confirm').style.height= "40px";
+        }
+      });
+      return
+      
     }else if(
       senhaVar != confirmacaoSenhaVar
     ){
+      Swal.fire({
+        title: "Ops!",
+        text: "As senhas devem ser iguais",
+        icon: "error",
+        width: 400,
+        padding: "1em",
+        color: "#2A253E",
+        background: "#FFFFFF",
+        backdrop: `rgba(78, 54, 41, 0.5)`,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#A90F0F',
+        willOpen: () => {
+          document.querySelector('.swal2-confirm').style.height= "40px";
+        }
+      });
       console.log('senha diferente')
-        return false;
+        return;
+    }else if(senhaVar.length < 7){
+      Swal.fire({
+        title: "Ops!",
+        text: "O valor mínimo de caracteres na senha é 7.",
+        icon: "error",
+        width: 400,
+        padding: "1em",
+        color: "#2A253E",
+        background: "#FFFFFF",
+        backdrop: `rgba(78, 54, 41, 0.5)`,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#A90F0F',
+        willOpen: () => {
+          document.querySelector('.swal2-confirm').style.height= "40px";
+        }
+      });
+        return;
+    }else if(senhaVar.length > 45){
+      Swal.fire({
+        title: "Ops!",
+        text: "O valor máximo de caracteres na senha é 45.",
+        icon: "error",
+        width: 400,
+        padding: "1em",
+        color: "#2A253E",
+        background: "#FFFFFF",
+        backdrop: `rgba(78, 54, 41, 0.5)`,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#A90F0F',
+        willOpen: () => {
+          document.querySelector('.swal2-confirm').style.height= "40px";
+        }
+      });
+      return
+    }else if(containsInvalidCharacters(emailVar)){
+      Swal.fire({
+        title: "Ops!",
+        text: "Caracteres inválidos. Remova-os para prosseguir.",
+        icon: "error",
+        width: 400,
+        padding: "1em",
+        color: "#2A253E",
+        background: "#FFFFFF",
+        backdrop: `rgba(78, 54, 41, 0.5)`,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#A90F0F',
+        willOpen: () => {
+          document.querySelector('.swal2-confirm').style.height= "40px";
+        }
+      });
+      return;
+    }else if(emailVar.indexOf("@") === -1){
+      Swal.fire({
+        title: "Ops!",
+        text: "É necessário inserir o @. Preencha-o para prosseguir.",
+        icon: "error",
+        width: 400,
+        padding: "1em",
+        color: "#2A253E",
+        background: "#FFFFFF",
+        backdrop: `rgba(78, 54, 41, 0.5)`,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#A90F0F',
+        willOpen: () => {
+          document.querySelector('.swal2-confirm').style.height= "40px";
+        }
+      });
+      return
     }
     
     // Enviando o valor da nova input
@@ -96,20 +205,62 @@
 
         if (resposta.ok) {
           console.log(resposta);
-
+          Swal.fire({
+          title: "Cadastro Realizado!",
+          text: "Redirecionando para pagina de login...",
+          icon: "success",
+          width: 400,
+          padding: "1em",
+          color: "#2A253E",
+          background: "#FFFFFF",
+          backdrop: `rgba(78, 54, 41, 0.5)`,
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#A90F0F',
+          willOpen: () => {
+            document.querySelector('.swal2-confirm').style.height= "40px";
+          }
+        });
           setTimeout(() => {
             window.location = "login.html";
           }, "1000");
 
         } else {
-          alert("Houve um erro ao realizar o cadastro. Por favor, tente novamente.");
+          Swal.fire({
+          title: "Ops!",
+          text: "Houve um erro ao realizar o cadastro. Por favor, tente novamente.",
+          icon: "error",
+          width: 400,
+          padding: "1em",
+          color: "#2A253E",
+          background: "#FFFFFF",
+          backdrop: `rgba(78, 54, 41, 0.5)`,
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#A90F0F',
+          willOpen: () => {
+            document.querySelector('.swal2-confirm').style.height= "40px";
+          }
+        });
           console.error("Erro no cadastro:", resposta);
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        alert("Ocorreu um erro ao tentar realizar o cadastro. Por favor, tente novamente.");
-
+        Swal.fire({
+          title: "Ops!",
+          text: "Ocorreu um erro ao tentar realizar o cadastro. Por favor, tente novamente.",
+          icon: "error",
+          width: 400,
+          padding: "1em",
+          color: "#2A253E",
+          background: "#FFFFFF",
+          backdrop: `rgba(78, 54, 41, 0.5)`,
+          confirmButtonText: 'Ok',
+          confirmButtonColor: '#A90F0F',
+          willOpen: () => {
+            document.querySelector('.swal2-confirm').style.height= "40px";
+          }
+        });
+      
       });
 
     return false;

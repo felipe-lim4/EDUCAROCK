@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/login.css">
     <link rel="icon" href="./assets/logo.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
@@ -46,8 +48,22 @@ function entrar() {
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-            console.log("(Mensagem de erro para todos os campos em branco)");
-            return false;                  
+            Swal.fire({
+                title: "Ops!",
+                text: "Preencha todos os campos",
+                icon: "error",
+                width: 400,
+                padding: "1em",
+                color: "#2A253E",
+                background: "#FFFFFF",
+                backdrop: `rgba(78, 54, 41, 0.5)`,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#A90F0F',
+                willOpen: () => {
+                    document.querySelector('.swal2-confirm').style.height= "40px";
+                }
+        });
+            return                  
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -67,7 +83,7 @@ function entrar() {
 
             if (resposta.ok) {
                 console.log(resposta);
-
+               
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
@@ -76,12 +92,44 @@ function entrar() {
                     sessionStorage.ID_USUARIO = json.idUsuario;
                     sessionStorage.USER_NAME = json.username;
                     
+                    Swal.fire({
+                    title: "Login realizado com sucesso!",
+                    text: "Redirecionando...",
+                    icon: "success",
+                    width: 400,
+                    padding: "1em",
+                    color: "#2A253E",
+                    background: "#FFFFFF",
+                    backdrop: `rgba(78, 54, 41, 0.5)`,
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#A90F0F',
+                    willOpen: () => {
+                        document.querySelector('.swal2-confirm').style.height= "40px";
+                    }
+                    });
+
+
                     setTimeout(function () {
                         window.location = "dashboard.html";
                     }, 1000); // Apenas para simular um tempo de resposta
                 });
 
             } else {
+                Swal.fire({
+                title: "Ops!",
+                text: "Houve um erro ao realizar o login. Por favor, tente novamente.",
+                icon: "error",
+                width: 400,
+                padding: "1em",
+                color: "#2A253E",
+                background: "#FFFFFF",
+                backdrop: `rgba(78, 54, 41, 0.5)`,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#A90F0F',
+                willOpen: () => {
+                    document.querySelector('.swal2-confirm').style.height= "40px";
+                }
+                });
                 console.log("Houve um erro ao tentar realizar o login!");
                 resposta.text().then(texto => {
                     console.error(texto);

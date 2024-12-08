@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qdocument</title>
+    <link rel="stylesheet" href="css/quiz.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+
+  
+    <main>
+        <div class="conteiner">
+            <h2>Quiz EducaRock!</h2>
+            <div>
+                <span id="spanQtd"></span>
+                <span id="questions"></span>
+                <div class="anwsers">
+                </div>
+            </div>
+            <div class="finsh">
+                <span></span>
+                <button>Reniciar</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+ const listaDeQuestoes = [
+    {
+        pergunta: "Qual é o instrumento mais usado no rock?",
+        alternativaA: "Violão clássico",
+        alternativaB: "Guitarra elétrica",
+        alternativaC: "Piano",
+        alternativaD: "Saxofone",
+        alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Quem é conhecido como o 'Rei do Rock'?",
+        alternativaA: "Elvis Presley",
+        alternativaB: "Chuck Berry",
+        alternativaC: "Jimi Hendrix",
+        alternativaD: "Kurt Cobain",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "Qual é o nome da escala mais usada no rock para solos?",
+        alternativaA: "Escala Pentatônica",
+        alternativaB: "Escala Cromática",
+        alternativaC: "Escala Maior",
+        alternativaD: "Escala Blues",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "O que significa 'power chord' na guitarra?",
+        alternativaA: "Um acorde com três notas",
+        alternativaB: "Um acorde com quinta e sem a terça",
+        alternativaC: "Um acorde invertido",
+        alternativaD: "Um acorde com sétima menor",
+        alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Qual banda brasileira é conhecida por misturar rock com skate e rap?",
+        alternativaA: "Legião Urbana",
+        alternativaB: "Charlie Brown Jr.",
+        alternativaC: "Raimundos",
+        alternativaD: "Titãs",
+        alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Qual foi o ano do famoso festival Woodstock, conhecido como um marco cultural da década de 1960?",
+        alternativaA: "1965",
+        alternativaB: "1967",
+        alternativaC: "1969",
+        alternativaD: "1971",
+        alternativaCorreta: "alternativaC"
+    },
+    {
+        pergunta: "Qual foi a primeira música do Charlie Brown Jr. que popularizou a banda e foi tema de abertura de Malhação?",
+        alternativaA: "Proibida pra Mim",
+        alternativaB: "Só os Loucos Sabem",
+        alternativaC: "Céu Azul",
+        alternativaD: "Zóio de Lula",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "Qual é o ritmo básico do rock em termos de tempo?",
+        alternativaA: "3/4",
+        alternativaB: "4/4",
+        alternativaC: "5/4",
+        alternativaD: "6/8",
+        alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Qual foi a principal banda do movimento nu metal que popularizou o gênero nos anos 2000?",
+        alternativaA: "Linkin Park",
+        alternativaB: "Korn",
+        alternativaC: "Limp Bizkit",
+        alternativaD: "Slipknot",
+        alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Quantas cordas possui um baixo comum?",
+        alternativaA: "4 cordas",
+        alternativaB: "5 cordas",
+        alternativaC: "6 cordas",
+        alternativaD: "3 cordas",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "Qual foi a banda responsável por ajudar a moldar a música moderna e popularizar o rock globalmente?",
+        alternativaA: "The Rolling Stones",
+        alternativaB: "The Beatles",
+        alternativaC: "Led Zeppelin",
+        alternativaD: "Pink Floyd",
+        alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Quem foi o guitarrista famoso por revolucionar os solos com a técnica de tapping?",
+        alternativaA: "Eddie Van Halen",
+        alternativaB: "Jimi Hendrix",
+        alternativaC: "Slash",
+        alternativaD: "Eric Clapton",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "Qual banda de rock brasileira fez mais sucesso durante os anos 2000, conquistando uma enorme base de fãs e emplacando hits como 'Tamo ai na Atividade'?",
+            alternativaA: "Legião Urbana",
+            alternativaB: "Charlie Brown Jr.",
+            alternativaC: "Os Mutantes",
+            alternativaD: "Titãs",
+            alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Qual é a função da palheta na guitarra elétrica?",
+        alternativaA: "Alterar o tom das notas",
+        alternativaB: "Tocar as cordas para produzir som",
+        alternativaC: "Ajustar a afinação",
+        alternativaD: "Trocar os pickups",
+        alternativaCorreta: "alternativaB"
+    }
+];
+
+
+    const btnRestart = document.querySelector('.finsh button');
+    const questions = document.querySelector('#questions');
+    const answers = document.querySelector('.anwsers');
+    const spanQtd = document.querySelector('#spanQtd');
+    const content = document.querySelector('.conteiner');
+    const contentFinish = document.querySelector('.finsh');
+
+    var currentQuestionIndex = 0;
+    var questionsCorrectsIndex = 0;
+
+    btnRestart.onclick = () => {
+        currentQuestionIndex = 0;
+        questionsCorrectsIndex = 0;
+        contentFinish.style.display = "none";
+        content.style.display = "flex";
+        loadQuestions();
+    };
+
+    function nextQuestion(e) {
+        const selectedAnswer = e.target;
+        if (selectedAnswer.getAttribute("data-correct") === "true") {
+            questionsCorrectsIndex++;
+        }
+
+        if (currentQuestionIndex < listaDeQuestoes.length - 1) {
+            currentQuestionIndex++;
+            loadQuestions();
+        } else {
+            finish();
+        }
+    }
+
+
+
+    function finish() {
+        content.style.display = "none";
+        const texto = `O jogo chegou ao fim! Você acertou ${questionsCorrectsIndex} questão(s). Deseja tentar mais uma vez?`;
+
+        Swal.fire({
+
+            title: texto,
+            text: 'Você deseja finalizar o jogo?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Não',
+            cancelButtonText: 'Sim',
+            width: 800,
+            padding: "2em",
+            color: "#fff",
+            background: "#06011B ",
+            backdrop: `#2A253E`,
+            confirmButtonColor: '#A90F0F',
+            cancelButtonColor:'#2A253E'
+
+
+        }).then(function (result) {
+
+            if (result.isConfirmed) {
+                window.location.href = "quiz.html";
+                enviar()
+
+            } else {
+                window.location.href = "dashboard.html";
+                enviar()
+
+            }
+        });
+    }
+
+
+
+    function loadQuestions() {
+        const item = listaDeQuestoes[currentQuestionIndex];
+        questions.innerHTML = item.pergunta;
+        answers.innerHTML = '';
+
+        const alternatives = [
+            { label: item.alternativaA, value: 'alternativaA' },
+            { label: item.alternativaB, value: 'alternativaB' },
+            { label: item.alternativaC, value: 'alternativaC' },
+            { label: item.alternativaD, value: 'alternativaD' }
+        ];
+
+        alternatives.forEach((alternative) => {
+            const div = document.createElement("div");
+            div.innerHTML = `
+                <button class="btn_alternatives" data-correct="${alternative.value === item.alternativaCorreta}" onclick="nextQuestion(event)">
+                    ${alternative.label}
+                </button>
+            `;
+            answers.appendChild(div);
+        });
+    }
+
+    loadQuestions();
+
+
+
+    function enviar() {
+        var qtdAcertosVar = questionsCorrectsIndex
+        var idUsuarioVar = sessionStorage.ID_USUARIO
+        idUsuarioVar= parseInt(idUsuarioVar)
+
+        fetch("/questionario/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                qtdAcertosServer: qtdAcertosVar,
+                idUsuarioServer: idUsuarioVar,
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    
+</script>

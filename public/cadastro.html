@@ -183,6 +183,23 @@
         }
       });
       return
+    }else if(nomeVar.length > 33){
+      Swal.fire({
+        title: "Ops!",
+        text: "É necessário inserir o @. Preencha-o para prosseguir.",
+        icon: "error",
+        width: 400,
+        padding: "1em",
+        color: "#2A253E",
+        background: "#FFFFFF",
+        backdrop: `rgba(78, 54, 41, 0.5)`,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#A90F0F',
+        willOpen: () => {
+          document.querySelector('.swal2-confirm').style.height= "40px";
+        }
+      });
+      return
     }
     
     // Enviando o valor da nova input

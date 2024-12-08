@@ -23,6 +23,9 @@
         <div id="bem_vindo">
           <p>Seja Bem vindo <br><span id="usuario">USUARIO!</span></p>
         </div>
+        <div id="sair">
+          <button onclick="limparSessao()">Sair</button>
+        </div>
       </div>
     </header>
 
@@ -52,9 +55,12 @@
 </html>
 
 <script>
+    function limparSessao() {
+        sessionStorage.clear(); // Limpa os dados da sessão
+        window.location.href = "../index.html"; // Redireciona para a página inicial
+        }
 
-
-  var nomeUsuario = sessionStorage.USER_NAME
+  var nomeUsuario = sessionStorage.NOME_USUARIO.split(" ")[0]
     // nome do usuario no canto superior
   usuario.innerHTML = nomeUsuario.toUpperCase() + '!'
   

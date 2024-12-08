@@ -33,6 +33,10 @@
           
           <img src="" alt="" />
         </div>
+        <div id="sair">
+          <button onclick="limparSessao()">Sair</button>
+        </div>
+        
       </div>
     </header>
 
@@ -80,6 +84,7 @@
           </div>
 
           <div class="card-ranking">
+            <h2>Ranking de horas estudas (7 dias)</h2>
             <div class="ranking-item">
               <p id="0Lugar" class="name">1. Artur Duarte</p>
               <p id="0qtd" class="hours">50 horas</p>
@@ -108,6 +113,10 @@
 </html>
 
 <script>
+   function limparSessao() {
+          sessionStorage.clear();
+          window.location = "../index.html";
+        }
 
   window.onload = function () {
     buscarMedidasGrafico();
@@ -126,26 +135,29 @@
 
 
   function geraGrafico(resposta) {
-    var nomeUsuario = sessionStorage.USER_NAME
+    var nomeUsuario = sessionStorage.NOME_USUARIO.split(" ")[0]
     // nome do usuario no canto superior
     usuario.innerHTML = nomeUsuario.toUpperCase() + '!'
     const data = {
-      labels: [],
-      datasets: [
-        {
-          label: `${nomeUsuario}`,
-          data: [],
-          fill: true,
-          borderColor: "#06011B",
-        },
-        {
-          label: "Usuarios",
-          data: [],
-          fill: true,
-          borderColor: "#A90F0F",
-        },
-      ],
-    };
+    labels: [],  // Suas labels aqui
+    datasets: [
+      {
+        label: `${nomeUsuario}`,
+        data: [], 
+        fill: true,  
+        borderColor: "#06011B",  
+        backgroundColor: 'rgba(6, 1, 27, 0.2)',  
+        tension: 0.1
+      },
+      {
+        label: "Usuarios",
+        data: [], 
+        fill: true, 
+        borderColor: "#A90F0F",  
+        backgroundColor: 'rgba(169, 15, 15, 0.2)',  
+      },
+    ],
+  };
     let dadosUsuario = resposta.usuario.reverse()
     let dadosTodosUsuarios = resposta.todosUsuarios
     
@@ -212,43 +224,59 @@
     KPI_qtd_estudo_semanal_usuario.innerHTML = somaHoras + ' Horas'
     KPI_qtd_estudo_semanal_todos.innerHTML = somaHorasTodos + ' Horas'
     const config = {
-      type: "line",
-      data: data,
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-          type: 'time', // Eixo X baseado em tempo
-          time: {
-            unit: 'day', // Unidade de tempo: dias
-            displayFormats: {
-              day: 'MM/dd', // Formato MM/DD para labels
-            },
+  type: "line",
+  data: data,
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        type: 'time', // Eixo X baseado em tempo
+        time: {
+          unit: 'day', // Unidade de tempo: dias
+          displayFormats: {
+            day: 'MM/dd', // Formato MM/DD para labels
           },
-          ticks: {
-            source: 'labels', // Usa as labels fornecidas
-          },
-            grid: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
-            },
-            border: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo X
-              width: 0.1, // Espessura da linha do eixo X
-            },
-          },
-
-          y: {
-            grid: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo Y
-            },
-            border: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo Y
-              width:  0.1, // Espessura da linha do eixo Y
-            },
+        },
+        ticks: {
+          source: 'labels', // Usa as labels fornecidas
+        },
+        grid: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
+        },
+        border: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo X
+          width: 0.1, // Espessura da linha do eixo X
+        },
+        title: {
+          display: true,
+          magin: 0,
+          text: 'Data',  // Título do eixo X
+          font: {
+            size: 14,  // Tamanho da fonte do título
           },
         },
       },
-    };
+      y: {
+        grid: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo Y
+        },
+        border: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo Y
+          width: 0.1, // Espessura da linha do eixo Y
+        },
+        title: {
+          display: true,
+          text: 'Horas',  // Título do eixo Y
+          magin: 0,
+          font: {
+            size: 14,  // Tamanho da fonte do título
+          },
+        },
+      },
+    },
+  },
+};
+
 
     const graficoQtdEstudo = new Chart(
       document.getElementById("graficoEstudo"),
@@ -289,8 +317,8 @@
       var idNome =  i+'Lugar'
       var idHoras = i+'qtd'
 
-    document.getElementById(idNome).innerHTML = ranking[i].Usuario;
-    document.getElementById(idHoras).innerHTML = ranking[i].TotalHorasEstudadas;
+    document.getElementById(idNome).innerHTML = `${i+1}º `+ ranking[i].Usuario;
+    document.getElementById(idHoras).innerHTML = ranking[i].TotalHorasEstudadas + ' Horas';
     }
   }
 

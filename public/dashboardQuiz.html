@@ -101,32 +101,48 @@
     };
 
     const config = {
-      type: "line",
-      data: data,
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            grid: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
-            },
-            border: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo X
-              width: 0.1, // Espessura da linha do eixo X
-            },
-          },
-          y: {
-            grid: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo Y
-            },
-            border: {
-              color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo Y
-              width:  0.1, // Espessura da linha do eixo Y
-            },
+  type: "line",
+  data: data,
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Dias',  // Título do eixo X
+          color: '#000',  // Cor do título do eixo
+          font: {
+            size: 14,  // Tamanho da fonte do título
           },
         },
+        grid: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
+        },
+        border: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo X
+          width: 0.1, // Espessura da linha do eixo X
+        },
       },
-    };
+      y: {
+        title: {
+          display: true,
+          text: 'Horas',  // Título do eixo Y
+          color: '#000',  // Cor do título do eixo
+          font: {
+            size: 14,  // Tamanho da fonte do título
+          },
+        },
+        grid: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo Y
+        },
+        border: {
+          color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo Y
+          width: 0.1, // Espessura da linha do eixo Y
+        },
+      },
+    },
+  },
+};
 
     const graficoQtdEstudo = new Chart(
       document.getElementById("graficoEstudo"),

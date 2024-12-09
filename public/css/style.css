@@ -41,16 +41,17 @@ header{
 
 
 .navbar{
-    
-    list-style: none;
     display: flex;
     width: 93%;
     height: 13%;
     flex-direction: row;
+    list-style: none;
     justify-content: center;
     align-items: center;
     background-color: 06011;
     font-size: 20px;
+    position: fixed;
+    
 }
 
 .navbar ul{
@@ -58,7 +59,6 @@ header{
     flex-direction: row;
     list-style: none;
     justify-content: space-around;
-    align-items: center;
     width: 100%;
 }
 

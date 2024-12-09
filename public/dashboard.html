@@ -11,7 +11,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 
-    <title>Document</title>
+    <title>dashboard</title>
   </head>
   <body>
     <header>
@@ -23,9 +23,6 @@
           <li><a href="./estudo.html">Estudo</a></li>
           <li><a href="./dashboard.html" style="background-color: #A90F0F;">Dashboard</a></li>
             <a href="quiz.html">Realizar Quiz</a>
-          </li>
-          <li>
-            <a href="">Resultados Quiz</a>
           </li>
         </ul>
         <div id="bem_vindo">
@@ -44,7 +41,7 @@
       <main class="main-container">
         <div class="main-cards">
           <div class="card" id="mediaDiaria">
-            <h3>Media de estudo diaria (ultimos 7 Dias)</h3>
+            <h3>Media de estudo diaria <br> (ultimos 7 Dias)</h3>
             <div class="card-inner">
               <h1 id="KPIMediaEstudo">?HORAS</h1>
             </div>
@@ -52,7 +49,7 @@
 
    
           <div class="card" id="mediaSemanal">
-            <h3>Horas estudadas (ultimos 7 Dias)</h3>
+            <h3>Horas estudadas <br> (ultimos 7 Dias)</h3>
             <div class="card-inner">
               <h1 id="KPI_qtd_estudo_semanal_usuario">?HORAS</h1>
             </div>
@@ -60,7 +57,7 @@
 
 
           <div class="card" id="mediaDiariaUsuarios">
-            <h3>Media de estudo usuarios (7 Dias)</h3>
+            <h3>Media de estudo <br> usuarios (7 Dias)</h3>
             <div class="card-inner">
               <h1 id="KPIMediaTodos">?HORAS</h1>
             </div>
@@ -68,7 +65,7 @@
 
 
           <div class="card">
-            <h3>Horas estudadas pelos usuarios (7 Dias)</h3>
+            <h3>Horas estudadas <br>usuarios (7 Dias)</h3>
             <div class="card-inner" id="mediaSemanalUsuarios">
               <h1 id="KPI_qtd_estudo_semanal_todos" >?HORAS</h1>
             </div>
@@ -84,7 +81,7 @@
           </div>
 
           <div class="card-ranking">
-            <h2>Ranking de horas estudas (7 dias)</h2>
+            <h2>Ranking de horas estudas Semanal</h2>
             <div class="ranking-item">
               <p id="0Lugar" class="name">1. Artur Duarte</p>
               <p id="0qtd" class="hours">50 horas</p>
@@ -188,8 +185,9 @@
         data.labels.push(dataFormatada)
         data.datasets[0].data.push(dadosUsuario[indexEstudoUsuario].qtdHora)
         somaHoras += dadosUsuario[indexEstudoUsuario].qtdHora
-    
         indexEstudoUsuario++
+
+
 
       }else{
 
@@ -223,6 +221,10 @@
     KPIMediaTodos.innerHTML = parseInt(kpiMediaTodos) + ' Horas'
     KPI_qtd_estudo_semanal_usuario.innerHTML = somaHoras + ' Horas'
     KPI_qtd_estudo_semanal_todos.innerHTML = somaHorasTodos + ' Horas'
+
+    sessionStorage.QUANTIDADE_ESTUDO = data.datasets[0].data[6]
+
+
     const config = {
   type: "line",
   data: data,
@@ -230,46 +232,46 @@
     responsive: true,
     scales: {
       x: {
-        type: 'time', // Eixo X baseado em tempo
+        type: 'time',
         time: {
-          unit: 'day', // Unidade de tempo: dias
+          unit: 'day', 
           displayFormats: {
-            day: 'MM/dd', // Formato MM/DD para labels
+            day: 'MM/dd', 
           },
         },
         ticks: {
-          source: 'labels', // Usa as labels fornecidas
+          source: 'labels',
         },
         grid: {
-          color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo X
+          color: "rgba(6, 1, 27, 0.5)",
         },
         border: {
-          color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo X
-          width: 0.1, // Espessura da linha do eixo X
+          color: "rgba(6, 1, 27, 0.5)", 
+          width: 0.1,
         },
         title: {
           display: true,
           magin: 0,
-          text: 'Data',  // Título do eixo X
+          text: 'Data',  
           font: {
-            size: 14,  // Tamanho da fonte do título
+            size: 14, 
           },
         },
       },
       y: {
         grid: {
-          color: "rgba(6, 1, 27, 0.5)", // Cor das linhas do grid no eixo Y
+          color: "rgba(6, 1, 27, 0.5)", 
         },
         border: {
-          color: "rgba(6, 1, 27, 0.5)", // Cor da linha do eixo Y
-          width: 0.1, // Espessura da linha do eixo Y
+          color: "rgba(6, 1, 27, 0.5)", 
+          width: 0.1, 
         },
         title: {
           display: true,
-          text: 'Horas',  // Título do eixo Y
+          text: 'Horas',  
           magin: 0,
           font: {
-            size: 14,  // Tamanho da fonte do título
+            size: 14, 
           },
         },
       },

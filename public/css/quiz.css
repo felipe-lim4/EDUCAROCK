@@ -18,7 +18,7 @@ body {
     background-color: #06011B;
 }
 main{
-    width: 40%;
+    width: 60%;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -27,6 +27,8 @@ main{
     background-color: #A90F0F;
     width: 100%;
     height:450px;
+    padding-left: 10%;
+    padding-right: 10%;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -35,6 +37,8 @@ main{
     text-align: center;
     color: #ffffffec;
 }
+
+
 
 .finsh{
     display: none;

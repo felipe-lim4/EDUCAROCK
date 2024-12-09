@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qdocument</title>
+    <title>quiz</title>
+    <link rel="icon" href="./assets/logo.svg" />
     <link rel="stylesheet" href="css/quiz.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -185,7 +186,16 @@
 
     function finish() {
         content.style.display = "none";
-        const texto = `O jogo chegou ao fim! Você acertou ${questionsCorrectsIndex} questão(s). Deseja tentar mais uma vez?`;
+        var texto = ""
+        if(questionsCorrectsIndex == 1){
+            texto = `O jogo chegou ao fim! Você acertou ${questionsCorrectsIndex} questão. Deseja tentar mais uma vez?`;
+        }else if(questionsCorrectsIndex > 1){
+            texto = `O jogo chegou ao fim! Você acertou ${questionsCorrectsIndex} questões. Deseja tentar mais uma vez?`;
+        }else{
+            texto = `O jogo chegou ao fim! Você infelizmente acertou ${questionsCorrectsIndex} questões. Deseja tentar mais uma vez?`;
+        }
+
+
 
         Swal.fire({
 
